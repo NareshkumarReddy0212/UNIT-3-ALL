@@ -1,0 +1,69 @@
+Experiment (e): Fetch and Render Data from a Public API using Axios
+Axios is a popular JavaScript library used to make HTTP requests from browsers and Node.js. In React, Axios helps fetch data from APIs and update components dynamically. In this experiment, students will use Axios to fetch posts from a public API (JSONPlaceholder) and display them in a React application.
+Aim:
+To fetch data from an external API and render it dynamically using React and Axios.
+Tools Required:
+• Node.js (LTS version) – https://nodejs.org/
+• Visual Studio Code – https://code.visualstudio.com/
+• Web browser (Google Chrome recommended)
+Procedure:
+1. Install Axios in your React project using the command:
+   npm install axios
+2. Create a new component file named src/components/PostsList.js
+3. Import useState and useEffect from React to manage state and side effects.
+4. Use the useEffect hook to make a GET request using Axios to fetch posts from JSONPlaceholder API.
+5. Store the response data in the posts state using the useState hook.
+6. Render the list of post titles dynamically using the map() function.
+7. Import and render the PostsList component inside App.js.
+8. Run the project using npm start and verify that posts are displayed correctly.
+
+
+Source Code:
+
+PostsList.js:
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+export default function PostsList() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts?_limit=5")
+      .then(res => setPosts(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+<div>
+<h3>Posts</h3>
+<ul>
+        {posts.map(p =><li key={p.id}><b>{p.title}</b></li>)}
+</ul>
+</div>
+  );
+}
+
+App.js:
+
+import React from "react";
+import PostsList from "./components/PostsList";
+
+export default function App() {
+  return (
+<div>
+<h1>React Axios Data Fetch Example</h1>
+<PostsList />
+</div>
+  );
+}
+Explanation:
+• Axios is used to perform HTTP requests and handle responses asynchronously.
+• useState() manages the posts array in local component state.
+• useEffect() ensures the API call runs once when the component mounts.
+• axios.get() sends a GET request to fetch data from the JSONPlaceholder API.
+• The map() function dynamically generates list items for each post.
+Expected Output:
+The webpage displays a list of 5 post titles fetched from the JSONPlaceholder API. Each title is rendered dynamically using React. The data appears instantly after the page loads without manual refreshing.
+Result:
+The application was successfully created using React and Axios. Students were able to fetch and render API data dynamically, demonstrating the integration of client-server communication using Axios.
